@@ -79,6 +79,13 @@ class SleepTrackerFragment : Fragment() {
         // This is necessary so that the binding can observe LiveData updates.
         binding.lifecycleOwner = this
         val manager = GridLayoutManager(activity, 5, GridLayoutManager.VERTICAL, false)
+        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int) = when (position) {
+                0 -> 5
+                else -> 1
+            }
+        }
+
         val adapter = SleepNightAdapter(SleepNightListener { nightId ->
             sleepTrackerViewModel.onSleepNightClicked(nightId)
             Toast.makeText(context, "${nightId}", Toast.LENGTH_LONG).show()
