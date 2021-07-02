@@ -90,7 +90,8 @@ class SleepTrackerFragment : Fragment() {
             id?.let {
                 findNavController().navigate(
                     SleepTrackerFragmentDirections
-                        .actionSleepTrackerFragmentToSleepQualityFragment(id))
+                        .actionSleepTrackerFragmentToSleepQualityFragment(id)
+                )
                 sleepTrackerViewModel.onSleepDetailNavigated()
             }
         })
@@ -111,7 +112,7 @@ class SleepTrackerFragment : Fragment() {
         })
         sleepTrackerViewModel.nights.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.submitList(it)
+                adapter.addHeaderAndSubmit(it)
             }
         })
         // Add an Observer on the state variable for Navigating when STOP button is pressed.
